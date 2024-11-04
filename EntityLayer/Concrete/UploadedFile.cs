@@ -15,5 +15,6 @@ namespace EntityLayer.Concrete
         public DateTime UploadDate { get; set; }
         public int FileSize { get; set; }
         public string FileType { get; set; }
+        public Answer Answer { get; set; }
     }
 }

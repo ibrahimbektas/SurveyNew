@@ -13,6 +13,10 @@ namespace EntityLayer.Concrete
         public int QuestionID { get; set; }
         public string Text { get; set; }
         public int OptionID { get; set; }
+        public Option Option { get; set; }
+        public Question Question { get; set; }
+        public Response Response { get; set; }
+        List<UploadedFile> UploadedFiles { get; set; } 
 
     }
 }

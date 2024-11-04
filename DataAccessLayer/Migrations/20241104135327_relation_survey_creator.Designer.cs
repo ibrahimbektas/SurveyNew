@@ -4,6 +4,7 @@ using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20241104135327_relation_survey_creator")]
+    partial class relation_survey_creator
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +48,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Answers", (string)null);
+                    b.ToTable("Answers");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.ConditionalQuestion", b =>
@@ -79,9 +82,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SurveyID");
-
-                    b.ToTable("ConditionalQuestions", (string)null);
+                    b.ToTable("ConditionalQuestions");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Creator", b =>
@@ -214,7 +215,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Options", (string)null);
+                    b.ToTable("Options");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Question", b =>
@@ -255,9 +256,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SurveyID");
-
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Response", b =>
@@ -279,9 +278,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SurveyID");
-
-                    b.ToTable("Responses", (string)null);
+                    b.ToTable("Responses");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Survey", b =>
@@ -310,7 +307,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("CreatorID");
 
-                    b.ToTable("Surveys", (string)null);
+                    b.ToTable("Surveys");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.UploadedFile", b =>
@@ -344,7 +341,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("UploadedFiles", (string)null);
+                    b.ToTable("UploadedFiles");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.User", b =>
@@ -372,9 +369,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SurveyID");
-
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -480,39 +475,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.ConditionalQuestion", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Survey", "survey")
-                        .WithMany()
-                        .HasForeignKey("SurveyID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("survey");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Question", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Survey", "survey")
-                        .WithMany()
-                        .HasForeignKey("SurveyID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("survey");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Response", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Survey", "survey")
-                        .WithMany()
-                        .HasForeignKey("SurveyID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("survey");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.Survey", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Creator", "creator")
@@ -522,17 +484,6 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("creator");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.User", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Survey", "survey")
-                        .WithMany()
-                        .HasForeignKey("SurveyID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("survey");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

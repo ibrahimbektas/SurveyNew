@@ -15,5 +15,7 @@ namespace EntityLayer.Concrete
         public int SurveyID { get; set; }
         public string Content { get; set; }
         public int Order { get; set; }
+        public Survey survey { get; set; }
+        List<Option> options { get; set; } 
     }
 }

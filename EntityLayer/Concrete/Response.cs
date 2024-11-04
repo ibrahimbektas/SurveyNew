@@ -12,5 +12,8 @@ namespace EntityLayer.Concrete
         public int SurveyID { get; set; }
         public int UserID { get; set; }
         public DateTime ResponseDate { get; set; }
+        public Survey survey { get; set; }
+        List<Answer> answers { get; set; }
+        public User user { get; set; }
     }
 }
