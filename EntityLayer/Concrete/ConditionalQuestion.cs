@@ -8,12 +8,12 @@ namespace EntityLayer.Concrete
 {
     public class ConditionalQuestion
     {
-        public int ConditionalQuestionID { get; set; }
-        public string ConditionalQuestionText { get; set; }
-        public int ConditionalQuestionNumber { get; set; }
-        public string ConditionalQuestionType { get; set; }
+        public int ID { get; set; }
+        public string Text { get; set; }
+        public int Number { get; set; }
+        public string Type { get; set; }
         public int SurveyID { get; set; }
-        public string ConditionalQuestionContent { get; set; }
-        public int ConditionalQuestionOrder { get; set; }
+        public string Content { get; set; }
+        public int Order { get; set; }
     }
 }

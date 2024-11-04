@@ -8,13 +8,13 @@ namespace EntityLayer.Concrete
 {
     public class Question
     {
-        public int QuestionID { get; set; }
-        public string QuestionText { get; set; }
-        public int QuestionNumber { get; set; }
-        public string QuestionType { get; set; }
+        public int ID { get; set; }
+        public string Text { get; set; }
+        public int Number { get; set; }
+        public string Type { get; set; }
         public int SurveyID { get; set; }
-        public string QuestionContent { get; set; }
-        public int QuestionOrder { get; set; }
+        public string Content { get; set; }
+        public int Order { get; set; }
         public int MaxFileSize { get; set; }
         public string AllowedFileType { get; set; }
     }

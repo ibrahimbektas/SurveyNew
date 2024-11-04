@@ -8,10 +8,10 @@ namespace EntityLayer.Concrete
 {
     public class Survey
     {
-        public int SurveyID { get; set; }
-        public string SurveyName { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
         public int CreatorID { get; set; }
         public DateTime CreationDate { get; set; }
-        public string SurveyVersion { get; set; }
+        public string Version { get; set; }
     }
 }

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class File
+    public class UploadedFile
     {
-        public int FileID { get; set; }
+        public int ID { get; set; }
         public int AnswerID { get; set; }
-        public string FileName { get; set; }
-        public string FilePath { get; set; }
+        public string Name { get; set; }
+        public string Path { get; set; }
         public DateTime UploadDate { get; set; }
         public int FileSize { get; set; }
         public string FileType { get; set; }
