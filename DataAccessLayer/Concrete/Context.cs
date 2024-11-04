@@ -17,7 +17,7 @@ namespace DataAccessLayer.Concrete
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=IBRAHIMBEKTAS\\SQLEXPRESS;Initial Catalog=SurveyNew;Integrated Security=True;Encrypt=False");
+            optionsBuilder.UseSqlServer("Data Source=IBRAHIMBEKTAS\\SQLEXPRESS;Initial Catalog=SurveyNew2;Integrated Security=True;Encrypt=False");
         }
 
         public DbSet<Answer> Answers { get; set; }
