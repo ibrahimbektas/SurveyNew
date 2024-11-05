@@ -17,10 +17,10 @@ namespace BusinessLayer.ValidatonRules.CreatorValidationRules
 			RuleFor(x => x.Email).NotEmpty().WithMessage("Email alanı boş bırakılamaz");
 			RuleFor(x => x.Username).NotEmpty().WithMessage("Kullanıcı adı alanı boş bırakılamaz");
 			RuleFor(x => x.Password).NotEmpty().WithMessage("Parola alanı boş bırakılamaz");
-			RuleFor(x => x.CconfirmPassword).NotEmpty().WithMessage("Parola tekrar alanı boş bırakılamaz");
+			RuleFor(x => x.ConfirmPassword).NotEmpty().WithMessage("Parola tekrar alanı boş bırakılamaz");
 			RuleFor(x => x.Name).MaximumLength(30).WithMessage("En fazla 30 karekter girişi yapabilirsiniz");
 			RuleFor(x => x.Name).MinimumLength(2).WithMessage("En az 2 karekter girmelisiniz");
-			RuleFor(x => x.CconfirmPassword).Equal(y => y.Password).WithMessage("Parolalar eşleşmiyor");
+			RuleFor(x => x.ConfirmPassword).Equal(y => y.Password).WithMessage("Parolalar eşleşmiyor");
 			RuleFor(x => x.Email).EmailAddress().WithMessage("Lütfen geçerli bir mail adresi giriniz");
 
 		}
