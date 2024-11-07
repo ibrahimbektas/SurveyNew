@@ -1,3 +1,4 @@
+using BusinessLayer.ValidatonRules.CreatorValidationRules;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
@@ -27,7 +28,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
