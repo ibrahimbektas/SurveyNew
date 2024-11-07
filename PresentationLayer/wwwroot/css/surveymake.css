@@ -1,0 +1,48 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+
+
+.anketiBitirButton {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
+
+.soruEkleButton {
+    position: fixed;
+    right:150px;
+    bottom:200px;
+}
+
+.soru{
+    margin-left:250px;
+}
+
+.question {
+    border-style: solid;
+    padding: 30px 30px 30px 30px;
+    left:400px;
+    margin:10px 10px 10px 10px;
+}
+

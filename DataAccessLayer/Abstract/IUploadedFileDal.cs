@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-	public interface IUploadedFileDal:IGenericDal<UploadedFile>
+	public interface IUploadedFileDal:IGenericDal<FileAnswer>
 	{
 	}
 }

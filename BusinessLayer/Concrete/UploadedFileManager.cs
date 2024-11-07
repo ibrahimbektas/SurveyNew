@@ -18,27 +18,27 @@ namespace BusinessLayer.Concrete
 			_uploadedFileDal = uploadedFileDal;
 		}
 
-		public void TDelete(UploadedFile t)
+		public void TDelete(FileAnswer t)
 		{
 			_uploadedFileDal.Delete(t);
 		}
 
-		public UploadedFile TGetById(int id)
+		public FileAnswer TGetById(int id)
 		{
 			return _uploadedFileDal.GetByID(id);
 		}
 
-		public List<UploadedFile> TGetList()
+		public List<FileAnswer> TGetList()
 		{
 			return _uploadedFileDal.GetList();
 		}
 
-		public void TInsert(UploadedFile t)
+		public void TInsert(FileAnswer t)
 		{
 			_uploadedFileDal.Insert(t);
 		}
 
-		public void TUpdate(UploadedFile t)
+		public void TUpdate(FileAnswer t)
 		{
 			_uploadedFileDal.Update(t);
 		}

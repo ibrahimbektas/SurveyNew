@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-	public interface IUploadedFileService:IGenericService<UploadedFile>
+	public interface IUploadedFileService:IGenericService<FileAnswer>
 	{
 	}
 }

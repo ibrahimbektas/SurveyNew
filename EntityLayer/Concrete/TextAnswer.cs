@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-    public class Answer
+    public class TextAnswer:Answer
     {
-        public int ID { get; set; }
-        public int ResponseID { get; set; }
-        public int QuestionID { get; set; }
+        public string Text { get; set; }
     }
 }
