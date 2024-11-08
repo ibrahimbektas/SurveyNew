@@ -10,13 +10,12 @@ namespace EntityLayer.Concrete
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int CreatorID { get; set; }
         public DateTime CreationDate { get; set; }
         public string? Version { get; set; }
-        public Creator creator { get; set; }
-        List<ConditionalQuestion> ConditionalQuestions { get; set; }
-		List<Question> Questions { get; set; }
-        List<Response> Responses { get; set; }
-        List<User> Users { get; set; }
+        List<Question> Questions { get; set; } 
+        List<User> Users { get; set; } 
+        List<ConditionalQuestion> ConditionalQuestions { get; set; } 
+        public int CreatorID { get; set; }
+        public Creator Creator { get; set; }
     }
 }
