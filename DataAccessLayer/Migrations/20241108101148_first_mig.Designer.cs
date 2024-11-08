@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241104135327_relation_survey_creator")]
-    partial class relation_survey_creator
+    [Migration("20241108101148_first_mig")]
+    partial class first_mig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,8 +33,10 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("OptionID")
-                        .HasColumnType("int");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<int>("QuestionID")
                         .HasColumnType("int");
@@ -42,13 +44,13 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("ResponseID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("ID");
 
                     b.ToTable("Answers");
+
+                    b.HasDiscriminator().HasValue("Answer");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.ConditionalQuestion", b =>
@@ -60,13 +62,12 @@ namespace DataAccessLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int>("Order")
+                    b.Property<int?>("Order")
                         .HasColumnType("int");
 
                     b.Property<int>("SurveyID")
@@ -81,6 +82,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("SurveyID");
 
                     b.ToTable("ConditionalQuestions");
                 });
@@ -200,13 +203,7 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("ConditionalQuestionID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestionID")
+                    b.Property<int?>("Order")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -227,20 +224,18 @@ namespace DataAccessLayer.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("AllowedFileType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MaxFileSize")
+                    b.Property<int?>("MaxFileSize")
                         .HasColumnType("int");
 
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int>("Order")
+                    b.Property<int?>("Order")
                         .HasColumnType("int");
 
                     b.Property<int>("SurveyID")
@@ -256,6 +251,8 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("SurveyID");
+
                     b.ToTable("Questions");
                 });
 
@@ -267,7 +264,7 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<DateTime>("ResponseDate")
+                    b.Property<DateTime?>("ResponseDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("SurveyID")
@@ -300,7 +297,6 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Version")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
@@ -308,40 +304,6 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("CreatorID");
 
                     b.ToTable("Surveys");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.UploadedFile", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("AnswerID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FileSize")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FileType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Path")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UploadDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("UploadedFiles");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.User", b =>
@@ -368,6 +330,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("SurveyID");
 
                     b.ToTable("Users");
                 });
@@ -475,6 +439,70 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.FileAnswer", b =>
+                {
+                    b.HasBaseType("EntityLayer.Concrete.Answer");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FileSize")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FileType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("FileAnswer");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.OptionAnswer", b =>
+                {
+                    b.HasBaseType("EntityLayer.Concrete.Answer");
+
+                    b.Property<int>("OptionId")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("OptionAnswer");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.TextAnswer", b =>
+                {
+                    b.HasBaseType("EntityLayer.Concrete.Answer");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("TextAnswer");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.ConditionalQuestion", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Survey", "survey")
+                        .WithMany()
+                        .HasForeignKey("SurveyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("survey");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Question", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Survey", "survey")
+                        .WithMany()
+                        .HasForeignKey("SurveyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("survey");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Survey", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Creator", "creator")
@@ -484,6 +512,17 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("creator");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.User", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Survey", "survey")
+                        .WithMany()
+                        .HasForeignKey("SurveyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("survey");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

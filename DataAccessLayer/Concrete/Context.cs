@@ -13,14 +13,6 @@ namespace DataAccessLayer.Concrete
 {
     public class Context : IdentityDbContext<Creator, CreatorRole, int>
     {
-        public Context(DbContextOptions<Context> options) : base(options)
-        {
-        }
-
-        //public Context(DbContextOptions<Context> options) : base(options)
-        //{
-        //}
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=IBRAHIMBEKTAS\\SQLEXPRESS;Initial Catalog=SurveyNew2;Integrated Security=True;Encrypt=False");
@@ -37,14 +29,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<OptionAnswer> OptionAnswers { get; set; }
         public DbSet<FileAnswer> FileAnswers { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<TextAnswer>().ToTable("TextAnswers");
-            builder.Entity<OptionAnswer>().ToTable("OptionAnswers");
-            builder.Entity<FileAnswer>().ToTable("FileAnswers");
-
-            base.OnModelCreating(builder);
-
-        }
+        
     }
 }

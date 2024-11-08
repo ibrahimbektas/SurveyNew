@@ -30,6 +30,11 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
                     b.Property<int>("QuestionID")
                         .HasColumnType("int");
 
@@ -40,7 +45,9 @@ namespace DataAccessLayer.Migrations
 
                     b.ToTable("Answers");
 
-                    b.UseTptMappingStrategy();
+                    b.HasDiscriminator().HasValue("Answer");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.ConditionalQuestion", b =>
@@ -447,7 +454,7 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("FileAnswers", (string)null);
+                    b.HasDiscriminator().HasValue("FileAnswer");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.OptionAnswer", b =>
@@ -457,7 +464,7 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("OptionId")
                         .HasColumnType("int");
 
-                    b.ToTable("OptionAnswers", (string)null);
+                    b.HasDiscriminator().HasValue("OptionAnswer");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.TextAnswer", b =>
@@ -468,7 +475,7 @@ namespace DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("TextAnswers", (string)null);
+                    b.HasDiscriminator().HasValue("TextAnswer");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.ConditionalQuestion", b =>
@@ -562,33 +569,6 @@ namespace DataAccessLayer.Migrations
                     b.HasOne("EntityLayer.Concrete.Creator", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.FileAnswer", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Answer", null)
-                        .WithOne()
-                        .HasForeignKey("EntityLayer.Concrete.FileAnswer", "ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.OptionAnswer", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Answer", null)
-                        .WithOne()
-                        .HasForeignKey("EntityLayer.Concrete.OptionAnswer", "ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.TextAnswer", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Answer", null)
-                        .WithOne()
-                        .HasForeignKey("EntityLayer.Concrete.TextAnswer", "ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
