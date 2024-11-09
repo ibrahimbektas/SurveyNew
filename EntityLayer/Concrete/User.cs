@@ -14,6 +14,7 @@ namespace EntityLayer.Concrete
         public string Mail { get; set; }
         public int SurveyID { get; set; }
         public Survey Survey { get; set; }
+        public List<Response> Responses { get; set; } 
 
     }
 }

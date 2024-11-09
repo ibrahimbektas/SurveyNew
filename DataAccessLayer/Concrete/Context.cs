@@ -38,6 +38,12 @@ namespace DataAccessLayer.Concrete
                 .HasForeignKey(z=>z.SurveyID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            builder.Entity<Response>()
+                .HasOne(x => x.User)
+                .WithMany(y => y.Responses)
+                .HasForeignKey(z => z.UserID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
             base.OnModelCreating(builder);
         }
 

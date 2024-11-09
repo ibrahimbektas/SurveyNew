@@ -13,5 +13,7 @@ namespace EntityLayer.Concrete
         List<Answer> Answers { get; set; }
         public int SurveyID { get; set; }
         public Survey Survey { get; set; }
+        public int UserID { get; set; }
+        public User User { get; set; }
     }
 }
