@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,17 @@ namespace DataAccessLayer.Concrete
         public DbSet<OptionAnswer> OptionAnswers { get; set; }
         public DbSet<FileAnswer> FileAnswers { get; set; }
 
-        
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Response>()
+                .HasOne(x=>x.Survey)
+                .WithMany(y=>y.Responses)
+                .HasForeignKey(z=>z.SurveyID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            base.OnModelCreating(builder);
+        }
+
+
     }
 }

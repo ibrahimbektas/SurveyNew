@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +17,6 @@ namespace EntityLayer.Concrete
         List<ConditionalQuestion> ConditionalQuestions { get; set; } 
         public int CreatorID { get; set; }
         public Creator Creator { get; set; }
+        public List<Response> Responses { get; set; } 
     }
 }
