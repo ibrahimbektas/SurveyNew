@@ -44,6 +44,24 @@ namespace DataAccessLayer.Concrete
                 .HasForeignKey(z => z.UserID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            builder.Entity<ConditionalQuestion>()
+                .HasOne(x => x.Question)
+                .WithMany(y => y.ConditionalQuestions)
+                .HasForeignKey(z => z.QuestionID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            builder.Entity<Option>()
+                .HasOne(x => x.ConditionalQuestion)
+                .WithMany(y => y.Options)
+                .HasForeignKey(z => z.ConditionalQuestionID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            //builder.Entity<Answer>()
+            //    .HasOne(x => x.Option)
+            //    .WithOne(y => y.Answer)
+            //    .HasForeignKey<Answer>(z => z.OptionID)
+            //    .OnDelete(DeleteBehavior.ClientSetNull);
+
             base.OnModelCreating(builder);
         }
 

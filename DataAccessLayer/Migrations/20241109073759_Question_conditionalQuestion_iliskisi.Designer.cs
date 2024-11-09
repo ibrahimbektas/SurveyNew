@@ -4,6 +4,7 @@ using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20241109073759_Question_conditionalQuestion_iliskisi")]
+    partial class Question_conditionalQuestion_iliskisi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("ResponseID");
 
-                    b.ToTable("Answers", (string)null);
+                    b.ToTable("Answers");
 
                     b.HasDiscriminator().HasValue("Answer");
 
@@ -91,7 +94,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("SurveyID");
 
-                    b.ToTable("ConditionalQuestions", (string)null);
+                    b.ToTable("ConditionalQuestions");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Creator", b =>
@@ -209,9 +212,6 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("ConditionalQuestionID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("Order")
                         .HasColumnType("int");
 
@@ -224,11 +224,9 @@ namespace DataAccessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ConditionalQuestionID");
-
                     b.HasIndex("QuestionID");
 
-                    b.ToTable("Options", (string)null);
+                    b.ToTable("Options");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Question", b =>
@@ -269,7 +267,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("SurveyID");
 
-                    b.ToTable("Questions", (string)null);
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Response", b =>
@@ -295,7 +293,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Responses", (string)null);
+                    b.ToTable("Responses");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Survey", b =>
@@ -323,7 +321,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("CreatorID");
 
-                    b.ToTable("Surveys", (string)null);
+                    b.ToTable("Surveys");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.User", b =>
@@ -353,7 +351,7 @@ namespace DataAccessLayer.Migrations
 
                     b.HasIndex("SurveyID");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -540,18 +538,11 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Option", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.ConditionalQuestion", "ConditionalQuestion")
-                        .WithMany("Options")
-                        .HasForeignKey("ConditionalQuestionID")
-                        .IsRequired();
-
                     b.HasOne("EntityLayer.Concrete.Question", "Question")
                         .WithMany("Options")
                         .HasForeignKey("QuestionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ConditionalQuestion");
 
                     b.Navigation("Question");
                 });
@@ -655,11 +646,6 @@ namespace DataAccessLayer.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.ConditionalQuestion", b =>
-                {
-                    b.Navigation("Options");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Question", b =>

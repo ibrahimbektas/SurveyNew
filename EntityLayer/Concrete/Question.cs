@@ -18,8 +18,9 @@ namespace EntityLayer.Concrete
         public int? Order { get; set; }
         public int? MaxFileSize { get; set; }
         public string? AllowedFileType { get; set; }
-        List<Answer> Answers { get; set; }
-        List<Option> Options { get; set; }
+        public List<Answer> Answers { get; set; }
+        public List<Option> Options { get; set; }
+        public List<ConditionalQuestion> ConditionalQuestions { get; set; }
 
     }
 }
