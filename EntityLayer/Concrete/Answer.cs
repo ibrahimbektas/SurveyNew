@@ -13,5 +13,6 @@ namespace EntityLayer.Concrete
         public Response Response { get; set; }
         public int QuestionID { get; set; }
         public Question Question { get; set; }
+        public List<Option> Options { get; set; }
     }
 }

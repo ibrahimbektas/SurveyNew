@@ -15,5 +15,7 @@ namespace EntityLayer.Concrete
         public Question Question { get; set; }
         public int ConditionalQuestionID { get; set; }
         public ConditionalQuestion ConditionalQuestion { get; set; }
+        public int AnswerID { get; set; }
+        public Answer Answer { get; set; }
     }
 }

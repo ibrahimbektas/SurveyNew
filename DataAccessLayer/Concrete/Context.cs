@@ -33,9 +33,9 @@ namespace DataAccessLayer.Concrete
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Response>()
-                .HasOne(x=>x.Survey)
-                .WithMany(y=>y.Responses)
-                .HasForeignKey(z=>z.SurveyID)
+                .HasOne(x => x.Survey)
+                .WithMany(y => y.Responses)
+                .HasForeignKey(z => z.SurveyID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.Entity<Response>()
@@ -56,15 +56,13 @@ namespace DataAccessLayer.Concrete
                 .HasForeignKey(z => z.ConditionalQuestionID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            //builder.Entity<Answer>()
-            //    .HasOne(x => x.Option)
-            //    .WithOne(y => y.Answer)
-            //    .HasForeignKey<Answer>(z => z.OptionID)
-            //    .OnDelete(DeleteBehavior.ClientSetNull);
+            builder.Entity<Option>()
+                .HasOne(x => x.Answer)
+                .WithMany(y => y.Options)
+                .HasForeignKey(z => z.AnswerID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             base.OnModelCreating(builder);
         }
-
-
     }
 }
