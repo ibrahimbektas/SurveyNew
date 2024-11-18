@@ -9,5 +9,7 @@ namespace BusinessLayer.Abstract
 {
 	public interface ISurveyService:IGenericService<Survey>
 	{
-	}
+        public List<Survey> TGetSurveyList(int id);
+
+    }
 }

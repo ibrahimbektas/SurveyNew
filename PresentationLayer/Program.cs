@@ -1,5 +1,9 @@
+using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using BusinessLayer.ValidatonRules.CreatorValidationRules;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Context>();
 builder.Services.AddIdentity<Creator, CreatorRole>().AddEntityFrameworkStores<Context>();
+
+builder.Services.AddScoped<ISurveyDal, EfSurveyDal>();
+builder.Services.AddScoped<ISurveyService, SurveyManager>();
 
 var app = builder.Build();
 

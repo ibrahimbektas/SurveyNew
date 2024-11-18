@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
 	public interface ISurveyDal:IGenericDal<Survey>
 	{
+		List<Survey> GetSurveyList(int id);
 	}
 }

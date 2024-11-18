@@ -33,7 +33,12 @@ namespace BusinessLayer.Concrete
 			return _surveyDal.GetList();
 		}
 
-		public void TInsert(Survey t)
+        public List<Survey> TGetSurveyList(int id)
+        {
+            return _surveyDal.GetSurveyList(id);
+        }
+
+        public void TInsert(Survey t)
 		{
 			_surveyDal.Insert(t);
 		}

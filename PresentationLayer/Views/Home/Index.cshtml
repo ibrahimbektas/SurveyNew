@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<EntityLayer.Concrete.Survey>
+@{
     //Home
     ViewData["Title"] = "Index";
     Layout = "~/Views/CreatorLayout/Index.cshtml";
@@ -17,14 +18,16 @@
             </div>
         </div>
         <div class="row m-t-25">
-            <div class="col-sm-6 col-lg-3">
-                <div class="overview-item overview-item--c1">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-6 col-lg-3">
+                    <div class="overview-item overview-item--c1">
                     <div class="overview__inner">
                         <div class="overview-box clearfix">
                             <div class="icon">
                             </div>
                             <div class="text">
-                                <h2>Anket 1</h2>
+                                <h2>@item.Name</h2>
                             </div>
                         </div>
                         <div class="overview-chart">
@@ -32,51 +35,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="overview-item overview-item--c2">
-                    <div class="overview__inner">
-                        <div class="overview-box clearfix">
-                            <div class="icon">
-                            </div>
-                            <div class="text">
-                                <h2>Anket 2</h2>
-                            </div>
-                        </div>
-                        <div class="overview-chart">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="overview-item overview-item--c3">
-                    <div class="overview__inner">
-                        <div class="overview-box clearfix">
-                            <div class="icon">
-                            </div>
-                            <div class="text">
-                                <h2>Anket 3</h2>
-                            </div>
-                        </div>
-                        <div class="overview-chart">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="overview-item overview-item--c4">
-                    <div class="overview__inner">
-                        <div class="overview-box clearfix">
-                            <div class="icon">
-                            </div>
-                            <div class="text">
-                                <h2>Anket 4</h2>
-                            </div>
-                        </div>
-                        <div class="overview-chart">
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>
