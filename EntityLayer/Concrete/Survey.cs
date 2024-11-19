@@ -12,6 +12,7 @@ namespace EntityLayer.Concrete
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
         public string? Version { get; set; }
+        public string Description { get; set; }
         List<Question> Questions { get; set; } 
         List<User> Users { get; set; } 
         List<ConditionalQuestion> ConditionalQuestions { get; set; } 

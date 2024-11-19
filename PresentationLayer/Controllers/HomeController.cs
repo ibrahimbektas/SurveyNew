@@ -12,22 +12,15 @@ namespace PresentationLayer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly UserManager<Creator> _userManager;
-        private readonly ISurveyService _surveyService;
 
         public HomeController(ILogger<HomeController> logger, UserManager<Creator> userManager, ISurveyService surveyService)
         {
             _logger = logger;
-            _userManager = userManager;
-            _surveyService = surveyService;
         }
 
-        public async Task<IActionResult>  Index()
+        public async Task<IActionResult> Index()
         {
-            var user=await _userManager.FindByNameAsync(User.Identity.Name);
-            var context = new Context();
-            var values=_surveyService.TGetSurveyList(user.Id);
-            return View(values);
+            return View();
         }
 
         public IActionResult Privacy()

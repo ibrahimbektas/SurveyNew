@@ -1,0 +1,41 @@
+﻿@model List<EntityLayer.Concrete.Survey>
+@{
+    //MyAllSurveys
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/CreatorLayout/Index.cshtml";
+}
+
+<div class="section__content section__content--p30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="overview-wrap">
+                    <h2 class="title-1">Anketlerim</h2>
+                    <a asp-controller="SurveyMake" asp-action="Index" class="au-btn au-btn-icon au-btn--blue">
+                        <i class="zmdi zmdi-plus"></i>Yeni Anket
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row m-t-25">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-6 col-lg-3">
+                    <div class="overview-item overview-item--c1">
+                        <div class="overview__inner">
+                            <div class="overview-box clearfix">
+                                <div class="icon">
+                                </div>
+                                <div class="text">
+                                    <h2>@item.Name</h2>
+                                </div>
+                            </div>
+                            <div class="overview-chart">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
