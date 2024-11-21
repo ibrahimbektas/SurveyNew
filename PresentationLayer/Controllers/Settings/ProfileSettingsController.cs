@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace PresentationLayer.Controllers
+namespace PresentationLayer.Controllers.Settings
 {
-    public class CreatorLayout : Controller
+    public class ProfileSettingsController : Controller
     {
         public IActionResult Index()
         {
