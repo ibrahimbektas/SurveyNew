@@ -29,7 +29,7 @@ namespace PresentationLayer.Controllers
             if (result.Succeeded)
             {
                 var user=await _userManager.FindByNameAsync(loginViewModel.Username);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "MyAllSurveys");
             }
             else
             {

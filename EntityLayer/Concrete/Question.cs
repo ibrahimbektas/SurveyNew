@@ -21,6 +21,8 @@ namespace EntityLayer.Concrete
         public List<Answer> Answers { get; set; }
         public List<Option> Options { get; set; }
         public List<ConditionalQuestion> ConditionalQuestions { get; set; }
+        public Boolean IsPublic { get; set; } = false;
+
 
     }
 }

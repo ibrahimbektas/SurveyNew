@@ -13,7 +13,7 @@ namespace PresentationLayer.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<Creator> userManager, ISurveyService surveyService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }

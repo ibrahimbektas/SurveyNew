@@ -1,0 +1,99 @@
+﻿@using DtoLayer.Dtos.SurveyDtos
+@model SurveyRegisterInfosDto
+
+@{
+    //MakeSpecialSurvey
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/CreatorLayout/Index.cshtml";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="surveyInfoModal" tabindex="-1" aria-labelledby="surveyInfoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="SurveyRegisterInfos" asp-controller="MakeSpecialSurvey" method="post">
+                <div class="form-group">
+                    <label for="surveyName">Anket Adı</label>
+                    <input type="text" class="form-control" id="surveyName" name="Name" placeholder="Anket adını girin" required>
+                </div>
+                <div class="form-group">
+                    <label for="surveyDescription">Açıklama</label>
+                    <textarea class="form-control" id="surveyDescription" name="Description" placeholder="Anket açıklamasını girin" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="surveyCategory">Kategori</label>
+                    <select class="form-select" id="surveyCategory" name="Category" required>
+                        <option value="Eğitim">Eğitim</option>
+                        <option value="Sağlık">Sağlık</option>
+                        <option value="Teknoloji">Teknoloji</option>
+                        <option value="Diğer">Diğer</option>
+                    </select>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="isPublic" name="IsPublic">
+                    <label class="form-check-label" for="isPublic">Bu anket herkese açık olsun</label>
+                </div>
+                <div class="form-group">
+                    <label for="version">Sürüm</label>
+                    <input type="text" class="form-control" id="version" name="Version" placeholder="Anket sürümünü girin" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Kaydet</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var surveyInfoModal = new bootstrap.Modal(document.getElementById("surveyInfoModal"));
+        surveyInfoModal.show();
+    });
+</script>
+
+<link rel="stylesheet" href="~/css/surveymake.css" asp-append-version="true" />
+
+
+<form>
+    <div style="display: flex" id="deneme">
+
+        <div>
+            <div v-for="(question, index, answerType) in questions" :key="question.id" class="question">
+                <label>{{index + 1}}. SORU </label>
+                <br>
+                <input type="text">
+                <label>Cevap Türü:</label>
+                <select id="answerType" v-model="question.answerType">
+                    <option value="Kısa Yanıt">Kısa Yanıt</option>
+                    <option value="Çoktan Seçmeli">Çoktan Seçmeli</option>
+                </select>
+                <button v-on:click.prevent="removeQuestion(index)">Soru Sil</button>
+
+                <hr />
+
+                <div v-if="question.answerType==='Çoktan Seçmeli'">
+                    <div v-for="(option,index) in question.options" :key="option.id" class="option">
+                        <label class="optionLabel"> {{index +1}}.Seçenek </label>
+                        <input class="optionInput" type="text" v-model="option.text" />
+                        <button v-on:click.prevent="removeOption(question,index)">SİL</button>
+                        <hr />
+                    </div>
+                    <button v-on:click.prevent="addOption(question)">Seçenek Ekle</button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div>
+            <button class="soruEkleButton" v-on:click.prevent="addQuestion">Soru Ekle</button>
+        </div>
+
+        <button class="anketiBitirButton">Anketi Bitir</button>
+
+    </div>
+</form>
+<script src="~/js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+<script src="~/js/Vue1.js"></script>
+
