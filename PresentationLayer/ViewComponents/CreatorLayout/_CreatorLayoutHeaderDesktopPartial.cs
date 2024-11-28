@@ -19,6 +19,7 @@ namespace PresentationLayer.ViewComponents.Home
             ViewBag.Name = values.Name;
             ViewBag.Surname = values.Surname;
             ViewBag.Email= values.Email;
+            ViewBag.ProfilePicture=values.ProfilePicture;
             return View();
         }
     }

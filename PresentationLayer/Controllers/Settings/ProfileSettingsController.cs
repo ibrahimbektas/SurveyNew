@@ -28,20 +28,47 @@ namespace PresentationLayer.Controllers.Settings
         [HttpPost]
         public async Task<IActionResult> Index(CreatorEditDto creatorEditDto)
         {
-            if (creatorEditDto.Password == creatorEditDto.ConfirmPassword)
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            // Kullanıcı bilgilerini güncelle
+            user.Name = creatorEditDto.Name;
+            user.Surname = creatorEditDto.Surname;
+            user.PhoneNumber = creatorEditDto.PhoneNumber;
+            user.Email = creatorEditDto.Email;
+
+            // Şifreyi kontrol et ve güncelle
+            if (!string.IsNullOrEmpty(creatorEditDto.Password) &&
+                creatorEditDto.Password == creatorEditDto.ConfirmPassword)
             {
-                var user = await _userManager.FindByNameAsync(User.Identity.Name);
-                user.Name = creatorEditDto.Name;
-                user.Surname = creatorEditDto.Surname;
-                user.PhoneNumber = creatorEditDto.PhoneNumber;
-                user.Email = creatorEditDto.Email;
                 user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, creatorEditDto.Password);
-                var result = await _userManager.UpdateAsync(user);
-                if (result.Succeeded)
+            }
+
+            if (creatorEditDto.ProfilePicture!=null)
+            {
+                var extension =Path.GetExtension(creatorEditDto.ProfilePicture.FileName);
+                var newImageName=Guid.NewGuid() + extension;
+                var location=Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ProfilePictures/", newImageName);
+                var stream= new FileStream (location, FileMode.Create);
+                creatorEditDto.ProfilePicture.CopyTo(stream);
+                user.ProfilePicture=newImageName;
+            }
+
+            // Kullanıcıyı güncelle ve sonucu kontrol et
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                // Şifre güncellenmişse kullanıcıyı yeniden giriş yapmaya yönlendir
+                if (!string.IsNullOrEmpty(creatorEditDto.Password))
                 {
                     return RedirectToAction("Index", "Login");
                 }
+                // Şifre güncellenmediyse anketlere yönlendir
+                return RedirectToAction("Index", "MyAllSurveys");
             }
+
+            // Güncelleme başarısız olursa aynı sayfayı döndür
+            return View();
+
             return View();
         }
     }
