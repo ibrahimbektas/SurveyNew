@@ -9,5 +9,6 @@ namespace BusinessLayer.Abstract
 {
 	public interface IQuestionService:IGenericService<Question>
 	{
+		public List<Question> TGetPublicQuestionList();
 	}
 }

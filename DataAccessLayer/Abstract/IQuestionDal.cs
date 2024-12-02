@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
 	public interface IQuestionDal:IGenericDal<Question>
 	{
-	}
+        List<Question> GetPublicQuestionList();
+    }
 }

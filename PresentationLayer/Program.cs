@@ -20,6 +20,9 @@ builder.Services.AddIdentity<Creator, CreatorRole>().AddEntityFrameworkStores<Co
 builder.Services.AddScoped<ISurveyDal, EfSurveyDal>();
 builder.Services.AddScoped<ISurveyService, SurveyManager>();
 
+builder.Services.AddScoped<IQuestionDal, EfQuestionDal>();
+builder.Services.AddScoped<IQuestionService, QuestionManager>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -23,7 +23,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<Question> Questions { get; set; }
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<ConditionalQuestion> ConditionalQuestions { get; set; }
         public DbSet<Option> Options { get; set; }
         public DbSet<Response> Responses { get; set; }
         public DbSet<TextAnswer> TextAnswers { get; set; }
@@ -42,18 +41,6 @@ namespace DataAccessLayer.Concrete
                 .HasOne(x => x.User)
                 .WithMany(y => y.Responses)
                 .HasForeignKey(z => z.UserID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            builder.Entity<ConditionalQuestion>()
-                .HasOne(x => x.Question)
-                .WithMany(y => y.ConditionalQuestions)
-                .HasForeignKey(z => z.QuestionID)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-
-            builder.Entity<Option>()
-                .HasOne(x => x.ConditionalQuestion)
-                .WithMany(y => y.Options)
-                .HasForeignKey(z => z.ConditionalQuestionID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.Entity<Option>()

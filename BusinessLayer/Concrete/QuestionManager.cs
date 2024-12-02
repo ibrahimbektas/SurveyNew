@@ -18,7 +18,12 @@ namespace BusinessLayer.Concrete
 			_questionDal = questionDal;
 		}
 
-		public void TDelete(Question t)
+        public List<Question> TGetPublicQuestionList()
+        {
+			return _questionDal.GetPublicQuestionList();
+        }
+
+        public void TDelete(Question t)
 		{
 			_questionDal.Delete(t);
 		}

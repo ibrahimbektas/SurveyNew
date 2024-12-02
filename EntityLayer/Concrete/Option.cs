@@ -13,8 +13,6 @@ namespace EntityLayer.Concrete
         public int? Order { get; set; }
         public int QuestionID { get; set; }
         public Question Question { get; set; }
-        public int ConditionalQuestionID { get; set; }
-        public ConditionalQuestion ConditionalQuestion { get; set; }
         public int AnswerID { get; set; }
         public Answer Answer { get; set; }
     }

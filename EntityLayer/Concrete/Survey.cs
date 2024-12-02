@@ -16,7 +16,6 @@ namespace EntityLayer.Concrete
         public string Description { get; set; }
         public List<Question> Questions { get; set; } 
         public List<User> Users { get; set; }
-        public List<ConditionalQuestion> ConditionalQuestions { get; set; } 
         public int CreatorID { get; set; }
         public Creator Creator { get; set; }
         public List<Response> Responses { get; set; }
