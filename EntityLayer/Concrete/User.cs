@@ -8,10 +8,13 @@ namespace EntityLayer.Concrete
 {
     public class User
     {
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public string UserSurname { get; set; }
-        public string UserMail { get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Mail { get; set; }
         public int SurveyID { get; set; }
+        public Survey Survey { get; set; }
+        public List<Response> Responses { get; set; } 
+
     }
 }

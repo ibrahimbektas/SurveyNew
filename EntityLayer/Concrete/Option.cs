@@ -8,9 +8,12 @@ namespace EntityLayer.Concrete
 {
     public class Option
     {
-        public int OptionID { get; set; }
-        public string OptionText { get; set; }
-        public int OptionOrder { get; set; }
+        public int ID { get; set; }
+        public string Text { get; set; }    
+        public int? Order { get; set; }
         public int QuestionID { get; set; }
-        public int ConditionalQuestionID { get; set; }
+        public Question Question { get; set; }
+        public int AnswerID { get; set; }
+        public Answer Answer { get; set; }
+    }
 }

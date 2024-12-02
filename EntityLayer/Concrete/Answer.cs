@@ -8,11 +8,11 @@ namespace EntityLayer.Concrete
 {
     public class Answer
     {
-        public int AnswerID { get; set; }
+        public int ID { get; set; }
         public int ResponseID { get; set; }
+        public Response Response { get; set; }
         public int QuestionID { get; set; }
-        public string AnswerText { get; set; }
-        public int OptionID { get; set; }
-
+        public Question Question { get; set; }
+        public List<Option> Options { get; set; }
     }
 }

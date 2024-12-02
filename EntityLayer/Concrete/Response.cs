@@ -8,9 +8,12 @@ namespace EntityLayer.Concrete
 {
     public class Response
     {
-        public int ResponseID { get; set; }
+        public int ID { get; set; }
+        public DateTime? ResponseDate { get; set; }
+        public List<Answer> Answers { get; set; }
         public int SurveyID { get; set; }
+        public Survey Survey { get; set; }
         public int UserID { get; set; }
-        public DateTime ResponseDate { get; set; }
+        public User User { get; set; }
     }
 }
