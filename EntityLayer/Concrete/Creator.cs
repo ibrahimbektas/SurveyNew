@@ -13,6 +13,7 @@ namespace EntityLayer.Concrete
         public string Surname { get; set; }
         public string Email { get; set; }
         public List<Survey> Surveys { get; set; }
-        public string ProfilePicture { get; set; } = "cb5c82e8-460b-4dba-9567-b5f368406b40.png";
+        public string ProfilePicture { get; set; } 
+        public string Gender { get; set; }
     }
 }

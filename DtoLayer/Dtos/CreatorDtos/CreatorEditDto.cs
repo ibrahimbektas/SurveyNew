@@ -16,5 +16,6 @@ namespace DtoLayer.Dtos.CreatorDtos
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public IFormFile ProfilePicture { get; set; }
+        public string Gender { get; set; }
     }
 }
